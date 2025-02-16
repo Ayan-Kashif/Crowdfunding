@@ -1,101 +1,110 @@
-import Image from "next/image";
+import Link from "next/link";
+import { FaEdit, FaHandHoldingHeart, FaShieldAlt, FaGlobe, FaUsers } from "react-icons/fa";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="min-h-screen bg-gray-100 text-gray-900">
+      {/* Hero Section */}
+      <section
+        style={{
+          backgroundImage: "url('/main.jpeg')",
+          backgroundSize: "cover",
+          backgroundBlendMode: "lighten",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+        }}
+        className="text-center py-20 px-6 min-h-screen flex flex-col justify-center text-blue-500"
+      >
+        <h1 className="text-5xl font-extrabold">Bring Ideas to Life, Support the Future</h1>
+        <p className="mt-4 text-lg text-purple-600 max-w-2xl mx-auto">
+          Empowering small investors to support innovative projects, businesses, and ideas in a way that reflects our shared values and traditions.
+        </p>
+        <div className="mt-6 flex justify-center space-x-4">
+          <Link
+            href="/create-campaign"
+            className="bg-white hover:bg-slate-100 text-gray-700 px-6 py-4 rounded-lg font-semibold shadow-lg transition-transform hover:scale-105"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Start a Campaign
+          </Link>
+          <Link
+            href="/explore"
+            className="bg-gray-800 text-white flex justify-center items-center px-6 py-2 rounded-lg font-semibold shadow-lg hover:scale-105 transition-transform"
           >
-            Read our docs
-          </a>
+            Explore Projects
+          </Link>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* Key Features */}
+      <section className="py-16 bg-gray-100">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">Key Features</h2>
+          <p className="text-gray-600 mb-12">
+            Discover the powerful features that make our platform stand out.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
+          {/* Feature 1 */}
+          <div className="text-center p-6 bg-white shadow-lg rounded-lg transition-transform hover:scale-105">
+            <div className="relative w-20 h-20 mx-auto flex items-center justify-center bg-red-500 text-white text-3xl rounded-full shadow-md">
+              <FaEdit />
+            </div>
+            <h3 className="mt-4 text-lg font-semibold">Easy Campaign Creation</h3>
+            <p className="text-gray-500 mt-2">Build your project page with simple tools and resources.</p>
+          </div>
+
+          {/* Feature 2 */}
+          <div className="text-center p-6 bg-white shadow-lg rounded-lg transition-transform hover:scale-105">
+            <div className="relative w-20 h-20 mx-auto flex items-center justify-center bg-purple-500 text-white text-3xl rounded-full shadow-md">
+              <FaHandHoldingHeart />
+            </div>
+            <h3 className="mt-4 text-lg font-semibold">Aligned with Our Values</h3>
+            <p className="text-gray-500 mt-2">All campaigns adhere to religious and cultural guidelines.</p>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="text-center p-6 bg-white shadow-lg rounded-lg transition-transform hover:scale-105">
+            <div className="relative w-20 h-20 mx-auto flex items-center justify-center bg-blue-500 text-white text-3xl rounded-full shadow-md">
+              <FaShieldAlt />
+            </div>
+            <h3 className="mt-4 text-lg font-semibold">Secure and Transparent</h3>
+            <p className="text-gray-500 mt-2">Trust your investments with secure payment options and clear funding processes.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission Section */}
+      <section className="py-16 bg-gradient-to-b from-blue-500 to-purple-600 text-white text-center">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
+          <p className="text-lg mb-6">
+            Our platform is designed to empower creators, businesses, and investors by providing a trustworthy and value-driven crowdfunding solution.
+            We strive to bring ideas to life in a way that respects our culture and beliefs.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-6">
+          {/* Mission Item 1 */}
+          <div className="flex flex-col items-center p-6 bg-white bg-opacity-20 rounded-lg shadow-lg hover:scale-105 transition-transform">
+            <FaGlobe size={50} className="mb-4" />
+            <h3 className="text-lg font-semibold">Global Reach</h3>
+            <p className="text-white text-opacity-90 mt-2">
+              Connecting investors and entrepreneurs from around the world.
+            </p>
+          </div>
+
+          {/* Mission Item 2 */}
+          <div className="flex flex-col items-center p-6 bg-white bg-opacity-20 rounded-lg shadow-lg hover:scale-105 transition-transform">
+            <FaUsers size={50} className="mb-4" />
+            <h3 className="text-lg font-semibold">Empowering Communities</h3>
+            <p className="text-white text-opacity-90 mt-2">
+              Helping communities thrive by funding meaningful projects.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
