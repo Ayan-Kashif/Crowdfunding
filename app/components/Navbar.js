@@ -333,7 +333,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         <Link href="/" className="flex gap-2">
           <img src="/images.png" className='h-8 me-3 rounded-full' alt="" />
-          <h1 className="text-2xl font-bold cursor-pointer">FundMe</h1>
+          <h1 className="text-2xl font-bold cursor-pointer">Fundify</h1>
         </Link>
 
         {/* Desktop Links */}
