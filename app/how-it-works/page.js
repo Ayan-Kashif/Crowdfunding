@@ -1,7 +1,7 @@
 'use client'
 
 import { FaBullseye, FaShareAlt, FaChartLine } from "react-icons/fa";
-import Link from 'next/Link'
+import Link from 'next/link'
 
 export default function HowItWorks() {
   return (
