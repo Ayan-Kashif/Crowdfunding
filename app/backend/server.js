@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors());
 
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe('sk_test_51Qsp8UQ6aazoGitOzBp05ADMgLTdkGvefg2UKqUA45I7a2yPYXtnlKQmvqd3vv3MCJIrIlXNyqelEnwOiTClrd7u00OQssjmKx');
 
 // MongoDB Connection
 mongoose
