@@ -42,7 +42,7 @@ const router=useRouter()
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/signup", {
+      const response = await fetch("http://82.29.153.135/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
