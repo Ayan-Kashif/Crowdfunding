@@ -109,7 +109,7 @@ app.post("/signup", async (req, res, next) => {
         const { name, email, password } = req.body;
 
         if (!name || !email || !password) {
-            return next(handleError(400, "All fields are required"));
+         res.status(400).json({ message: "All fields are required!" });
         }
 
         let existingUser = await User.findOne({ email });
