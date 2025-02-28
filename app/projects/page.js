@@ -92,7 +92,7 @@ export default function Campaigns() {
     useEffect(() => {
         async function fetchCampaigns() {
             try {
-                const res = await fetch('http://localhost:5000/campaigns'); // API Route to get all campaigns
+                const res = await fetch('http://82.29.153.135:3000/campaigns'); // API Route to get all campaigns
                 if (!res.ok) throw new Error('Failed to fetch');
                 const data = await res.json();
                 setCampaigns(data);
