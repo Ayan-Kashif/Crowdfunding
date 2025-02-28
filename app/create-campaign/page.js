@@ -477,7 +477,7 @@ export default function CreateCampaign() {
         });
 
         try {
-            const response = await fetch("http://localhost:5000/campaign", {
+            const response = await fetch("http://82.29.153.135:3000/campaign", {
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}` },
                 body: formDataToSend,
