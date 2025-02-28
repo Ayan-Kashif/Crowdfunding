@@ -35,7 +35,7 @@ export default function Campaigns() {
         async function fetchCampaigns() {
             try {
                 console.log("Fetching campaigns for:", creator.id);
-                const response = await fetch("http://localhost:5000/myCampaigns", {
+                const response = await fetch("http://82.29.153.135:3000/myCampaigns", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ id: creator.id }),
