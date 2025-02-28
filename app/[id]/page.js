@@ -326,7 +326,7 @@ const [funder, setFunder] = useState({})
             try {
                 if (!id) throw new Error("Project ID is missing.");
 
-                const response = await fetch("http://localhost:5000/project", {
+                const response = await fetch("http://82.29.153.135:3000/project", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ projectID: id }),
