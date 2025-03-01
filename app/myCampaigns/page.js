@@ -82,7 +82,7 @@ export default function Campaigns() {
         <div className="container mt-20 bg-white mx-auto p-6">
             <h1 className="text-2xl text-gray-600 text-center font-bold mb-6">My Campaigns</h1>
             {campaigns?.length === 0 ? (
-                <div className="text-center">
+                <div className="text-center min-h-screen">
                     <p className="text-gray-500">No campaigns found.</p>
                     <button className="mt-4 flex items-center justify-center gap-2">
                         <PlusCircle size={16} /> Create Campaign
