@@ -235,8 +235,8 @@ app.post('/stripe/create-account', async (req, res) => {
         // Create an onboarding link for the user
         const accountLink = await stripe.accountLinks.create({
             account: account.id,
-            refresh_url: "http://localhost:3000/retry",
-            return_url: `http://localhost:3000/create-campaign`,
+            refresh_url: "http://82.29.153.135:3000/retry",
+            return_url: `http://82.29.153.135:3000/create-campaign`,
             type: "account_onboarding",
         });
         await User.findByIdAndUpdate(creatorId, { accountID: account.id });
