@@ -540,7 +540,7 @@ export default function CreateCampaign() {
     const enablePayments = async () => {
         setPayLoading(true);
         console.log(creator)
-        const res = await fetch("http://localhost:5000/stripe/create-account", {
+        const res = await fetch("http://82.29.153.135:5000/stripe/create-account", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: creator?.email, creatorId: creator?.id }),
