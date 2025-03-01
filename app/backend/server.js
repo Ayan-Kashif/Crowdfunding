@@ -113,9 +113,9 @@ app.post("/signup", async (req, res, next) => {
         }
 
         let existingUser = await User.findOne({ email });
-        if (existingUser) {
-            res.status(400).json({ message: "User already exists" });
-        }
+   if (existingUser) {
+    return res.status(400).json({ message: "User already exists" });
+}
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({ name, email, password: hashedPassword });
