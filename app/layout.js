@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "FundMe",
-  description: "The ultimate crowdfunding platfomr",
+  title: "Fundify",
+  description: "Empowering small investors to support innovative projects, businesses, and ideas in a way that reflects our shared values and traditions.",
 };
 
 export default function RootLayout({ children }) {
