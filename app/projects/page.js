@@ -158,7 +158,7 @@ export default function Campaigns() {
                         <div key={campaign._id} className="relative group rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-105 hover:h-[400px] hover:border-dotted hover:border hover:shadow-md hover:border-gray-500 hover:bg-white">
 
                             {/* Project Image */}
-                            <img src={`http://82.29.153.135:5000${campaign.image}`} alt={campaign.title} className="w-full h-40 object-cover" />
+                            <img src={`http://82.29.153.135:5000/uploads/${campaign.image}`} alt={campaign.title} className="w-full h-40 object-cover" />
 
                             {/* Project Details */}
                             <div className="p-4">
