@@ -326,7 +326,7 @@ const [funder, setFunder] = useState({})
             try {
                 if (!id) throw new Error("Project ID is missing.");
 
-                const response = await fetch("http://82.29.153.135:3000/project", {
+                const response = await fetch("http://82.29.153.135:5000/project", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ projectID: id }),
@@ -361,7 +361,7 @@ const [funder, setFunder] = useState({})
 
         try {
             setLoading(true);
-            const response = await fetch("http://localhost:5000/stripe/create-checkout-session", {
+            const response = await fetch("http://82.29.153.135:5000/stripe/create-checkout-session", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ projectId: project._id, amount: amount * 100 ,userId:funder?.id}), // Convert to cents
@@ -391,7 +391,7 @@ const [funder, setFunder] = useState({})
                 <div className="flex flex-col md:flex-row mt-6 gap-6">
                     <div className="w-full md:w-2/3">
                         <img
-                            src={`http://localhost:5000${project.image}`}
+                            src={`http://82.29.153.135:5000${project.image}`}
                             alt={project.title}
                             className="w-full max-h-[65vh] object-cover rounded-lg shadow-md"
                         />
