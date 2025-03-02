@@ -362,7 +362,7 @@ export default function Navbar() {
             )
           )}
 
-          {(isLoggedIn &&  path !== "/login"  ) && <div onClick={handlePopupToggle} className="w-12 h-12 font-bold flex justify-center items-center bg-black text-white rounded-full">
+         <div classname='flex justify-center items-center'> {(isLoggedIn &&  path !== "/login"  ) && <div onClick={handlePopupToggle} className="w-12 h-12 font-bold flex justify-center items-center bg-black text-white rounded-full">
             {user?.name
               ? user.name
                 .split(" ")
@@ -372,6 +372,7 @@ export default function Navbar() {
               : ""}
           </div>
           }
+</div>
         </div>
 
 
