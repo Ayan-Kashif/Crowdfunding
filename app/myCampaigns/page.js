@@ -84,9 +84,11 @@ export default function Campaigns() {
             {campaigns?.length === 0 ? (
                 <div className="text-center min-h-screen">
                     <p className="text-gray-500">No campaigns found.</p>
-                    <button className="mt-4 flex items-center justify-center gap-2">
+                <Link href='http://82.29.153.135:3000/create-campaign'>
+                    <button className="mt-4 text-gray-500 flex items-center justify-center gap-2">
                         <PlusCircle size={16} /> Create Campaign
                     </button>
+                </Link>
                 </div>
             ) : (
                 <div className="grid     mt-20 gap-6 md:grid-cols-2 lg:grid-cols-3">
