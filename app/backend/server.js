@@ -283,17 +283,28 @@ app.post('/stripe/fund-project', async (req, res) => {
 
 app.post("/stripe/create-checkout-session", async (req, res) => {
     try {
-        const { projectId, amount, userId } = req.body; // Assuming userId is sent from the frontend
+        const { projectId, amount, userId } = req.body; // userId = donor
 
+        // ✅ Find the project
+        const project = await Campaign.findById(projectId);
+        if (!project) {
+            return res.status(404).json({ error: "Project not found." });
+        }
+
+        // ✅ Find the project creator
+        const creator = await User.findById(project.creator);
+        if (!creator || !creator.accountID) {
+            return res.status(400).json({ error: "Invalid creator or missing account ID" });
+        }
+
+        // ✅ Create Checkout Session with Transfer
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
             line_items: [
                 {
                     price_data: {
                         currency: "usd",
-                        product_data: {
-                            name: "Project Funding",
-                        },
+                        product_data: { name: "Project Funding" },
                         unit_amount: amount, // Amount in cents ($10 = 1000)
                     },
                     quantity: 1,
@@ -302,33 +313,31 @@ app.post("/stripe/create-checkout-session", async (req, res) => {
             mode: "payment",
             success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${process.env.CLIENT_URL}/cancel`,
+            payment_intent_data: {
+                transfer_data: {
+                    destination: creator.accountID, // ✅ Project creator's Stripe account
+                },
+            },
         });
 
-        // ✅ Update project after payment session creation
-        const project = await Campaign.findById(projectId);
-        if (!project) {
-            return res.status(404).json({ error: "Project not found." });
-        }
-
-        // Update pledged amount and backers
+        // ✅ Update pledged amount & backers **BEFORE** sending response
         project.pledged += amount / 100; // Convert cents to dollars
         project.backers.push({
-            user: userId,
-            amount: amount / 100, // Convert cents to dollars
+            user: userId, // Donor
+            amount: amount / 100,
             date: new Date(),
         });
 
         // Increase backers count
         project.backersCount = project.backers.length;
-
-        // Save the updated project
         await project.save();
 
+        // ✅ Send response **ONLY ONCE**
         res.json({ sessionId: session.id });
 
     } catch (error) {
+        console.error("Error creating session:", error);
         res.status(500).json({ error: error.message });
-        console.log(error);
     }
 });
 
