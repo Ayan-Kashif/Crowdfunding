@@ -527,7 +527,7 @@ export default function CreateCampaign() {
         console.log("Current formData:", formData);
         if (step === 1 && formData.title.trim().length < 3) { return false; }
         if (step === 2 && formData.category === "") { return false; }
-        if (step === 3 && formData.description.trim().length < 25) { return false; }
+        if (step === 3 && formData.description.trim().length < 10) { return false; }
         if (step === 4 && !formData.image) { return false; }
         if (step === 5 && formData.location === "") { return false; }
         if (step === 6 && formData.duration === "") { return false; }
