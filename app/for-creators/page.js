@@ -14,7 +14,7 @@ export default function ForCreators() {
                 <p className="text-lg  text-gray-700 md:text-xl max-w-2xl">
                     Turn your dreams into reality with our intuitive tools. From building your campaign page to managing your pledges, we support you every step of the way.
                 </p>
-                <Link href="/start-campaign">
+                <Link href="/create-campaign">
                     <button className="mt-6 bg-white text-green-700 px-6 py-3 rounded-lg font-semibold text-lg hover:bg-gray-200 transition-colors shadow-lg">
                         Start Your Campaign
                     </button>
@@ -41,9 +41,11 @@ export default function ForCreators() {
                         <p className="text-gray-800 mt-2">Get support, tools, and resources to optimize your project’s success.</p>
                     </div>
                 </div>
+                <Link href="/create-campaign" >
                 <button className="mt-6 px-6 py-3 bg-black text-white font-semibold rounded-lg hover:opacity-80 transition shadow-lg">
                     Let's Create
                 </button>
+                </Link>
             </section>
 
             {/* How It Works Section */}
