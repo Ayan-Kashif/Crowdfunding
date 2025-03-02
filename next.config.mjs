@@ -11,7 +11,7 @@ const nextConfig = {
               default-src 'self'; 
               script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://trusted-source.com https://www.google.com https://www.gstatic.com;
               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-              img-src 'self' data: http://82.29.153.135:5000/uploads http:82.29.153.135:5000 https://stripe.com https://js.stripe.com;
+              img-src 'self' data: http://82.29.153.135:5000/uploads http://82.29.153.135:5000/uploads/  https://stripe.com https://js.stripe.com;
               font-src 'self' https://fonts.gstatic.com https://js.stripe.com;
               connect-src 'self' http://82.29.153.135:5000/ https://api.stripe.com;
               frame-src 'self' https://js.stripe.com https://www.google.com https://www.recaptcha.net;
