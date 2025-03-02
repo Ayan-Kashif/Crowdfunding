@@ -62,7 +62,7 @@ export default function Campaigns() {
         if (!confirm("Are you sure you want to delete this campaign?")) return;
 
         try {
-            const response = await fetch(`http://localhost:5000/deleteCampaign/${id}`, {
+            const response = await fetch(`http://82.29.153.135:5000/deleteCampaign/${id}`, {
                 method: "DELETE",
             });
 
