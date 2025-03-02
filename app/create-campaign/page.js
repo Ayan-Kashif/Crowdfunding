@@ -487,7 +487,7 @@ export default function CreateCampaign() {
             if (!response.ok) throw new Error(data.error || "Something went wrong");
 
             toast.success("Campaign created successfully!");
-            router.push("/dashboard");
+            router.push("/myCampaigns");
         } catch (error) {
             toast.error(error.message);
         } finally {
