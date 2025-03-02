@@ -9,12 +9,12 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: `
               default-src 'self'; 
-              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://trusted-source.com;
+              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://trusted-source.com;
               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-              img-src 'self' data: https://trusted-image-source.com;
+              img-src 'self' data: https://your-image-source.com https://stripe.com https://js.stripe.com;
               font-src 'self' https://fonts.gstatic.com https://js.stripe.com;
-              connect-src 'self' http://82.29.153.135:5000 https://api.yourbackend.com https://js.stripe.com;
-              frame-src 'self' https://trusted-iframe.com;
+              connect-src 'self' https://api.yourbackend.com https://api.stripe.com;
+              frame-src 'self' https://js.stripe.com;
             `.replace(/\n/g, ""), // Remove new lines
           },
         ],
@@ -24,4 +24,5 @@ const nextConfig = {
 };
 
 export default nextConfig;
+
 
