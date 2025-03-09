@@ -33,7 +33,7 @@ export default function ChangePassword() {
                 throw new Error("Authentication failed! Please log in again.");
             }
 
-            const response = await fetch("http://localhost:5000/admin-change-password", {
+            const response = await fetch("http://82.29.153.135:5000/admin-change-password", {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${adminToken}`,
