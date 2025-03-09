@@ -587,19 +587,19 @@ export default function CreateCampaign() {
                             <h2 className="text-2xl font-bold text-center mb-4">Select Category</h2>
                             <div className="flex items-center border p-3 rounded-lg">
                                 <FaListAlt className="mr-2 text-blue-500" />
-                                <select
+                             <select
                                     name="category"
                                     value={formData.category}
                                     onChange={handleChange}
                                     className="w-full  outline-none"
                                 >
                                     <option classname='' value="">Choose a category</option>
-                                    <option value="education">Technology</option>
+                                    <option value="technology">Technology</option>
                                     <option value="education">Education</option>
-                                    <option value="health">Health</option>
-                                    <option value="environment">Environment</option>
-                                    <option value="disaster">Disaster Relief</option>
-                                    <option value="community">Community Support</option>
+                                    <option value="healthcare">Health Care</option>
+                                    <option value="gaming">Gaming</option>
+                                    <option value="green tech">Green Tech</option>
+                                    <option value="consumer products">Consumber Products</option>
                                 </select>
                             </div>
                             <div className="flex justify-between mt-4">
