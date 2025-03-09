@@ -42,7 +42,7 @@ export default function AdminDashboard() {
         setLoading(true);
         try {
             const adminToken = localStorage.getItem("adminToken");
-            const response = await fetch("http://localhost:5000/admin/campaigns", {
+            const response = await fetch("http://82.29.153.135:5000/admin/campaigns", {
                 headers: {
                     "Authorization": `Bearer ${adminToken}`,
                     "Content-Type": "application/json",
