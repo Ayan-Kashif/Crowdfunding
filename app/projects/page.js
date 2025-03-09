@@ -80,6 +80,9 @@
 
 
 
+
+
+
 'use client';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -121,6 +124,11 @@ export default function Campaigns() {
         return daysLeft; // Return remaining days
     };
 
+    function capitalize(str) {
+        return str.replace(/\b\w/g, char => char.toUpperCase());
+    }
+
+
     return (
         <div className="container mx-auto p-6   min-h-screen bg-white py-40">
 
@@ -138,15 +146,17 @@ export default function Campaigns() {
             </div>
 
             {/* Category Filters */}
-            <div className="flex justify-center space-x-6 mb-16">
-                {['All', 'Technology', 'Education', 'Health', 'Art'].map((category) => (
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 sm:mb-16">
+                {['All', 'technology', 'education', 'healthcare', 'gaming', 'consumer products'].map((category) => (
                     <button
                         key={category}
-                        className={`text-lg font-semibold text-gray-700 pb-1 transition-all ${selectedCategory === category ? 'border-b-2 border-blue-500 text-blue-600' : 'hover:text-blue-500'
+                        className={`text-base sm:text-lg font-semibold text-gray-700 pb-1 transition-all ${selectedCategory === category
+                                ? 'border-b-2 border-blue-500 text-blue-600'
+                                : 'hover:text-blue-500'
                             }`}
                         onClick={() => setSelectedCategory(category)}
                     >
-                        {category}
+                        {capitalize(category)}
                     </button>
                 ))}
             </div>
@@ -158,7 +168,7 @@ export default function Campaigns() {
                         <div key={campaign._id} className="relative group rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-105 hover:h-[400px] hover:border-dotted hover:border hover:shadow-md hover:border-gray-500 hover:bg-white">
 
                             {/* Project Image */}
-                            <img src={`http://82.29.153.135:5000${campaign.image}`} alt={campaign.title} className="w-full h-40 object-cover" />
+                            <img src={`http://localhost:5000${campaign.image}`} alt={campaign.title} className="w-full h-40 object-cover" />
 
                             {/* Project Details */}
                             <div className="p-4">
@@ -205,4 +215,6 @@ export default function Campaigns() {
         </div>
     );
 }
+
+
 
