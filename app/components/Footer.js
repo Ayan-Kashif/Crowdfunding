@@ -39,6 +39,9 @@ const Footer = () => {
                                     <li>
                                         <a href="/investors" class="hover:underline">For Investors</a>
                                     </li>
+                                    <li class="mb-4">
+                                        <a href="/admin/dashboard" class="hover:underline">For Investors</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div>
