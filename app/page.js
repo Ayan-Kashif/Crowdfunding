@@ -44,7 +44,7 @@ export default function HomePage() {
   
   return (
     <>
-    <section className="flex  mt-20 flex-col md:flex-row items-center justify-between px-6 md:px-16 py-16 bg-gradient-to-r from-purple-100 to-white">
+    <section className="flex  mt-10 flex-col md:flex-row items-center justify-between px-6 md:px-16 py-16 bg-gradient-to-r from-purple-100 to-white">
       {/* Left Content */}
       <div className="max-w-xl text-center md:text-left">
         <div className="inline-flex items-center bg-white px-4 py-2 rounded-full shadow-md mb-4">
