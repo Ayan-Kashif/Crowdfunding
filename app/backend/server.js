@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require('path')
 const Stripe = require("stripe");
+const Admin = require("./models/Admin");
 
 const Campaign = require("./models/Campaign");
 
@@ -71,8 +72,12 @@ app.get("/campaigns", async (req, res) => {
         const activeCampaigns = campaigns.filter(campaign => {
             const endTime = new Date(campaign.createdAt);
             endTime.setDate(endTime.getDate() + campaign.duration); // Adding days to createdAt
-
-            return endTime > currentTime; // Only return campaigns that have time left
+        
+            return (
+                endTime > currentTime && // Campaign is still active
+                campaign.status === "approved" && // Campaign is approved
+                !campaign.creator.banned // Creator is not banned
+            );
         });
 
         res.status(200).json(activeCampaigns);
@@ -385,3 +390,262 @@ app.delete("/deleteCampaign/:id", async (req, res) => {
         res.status(500).json({ error: "Internal server error." });
     }
 });
+
+
+
+
+
+
+
+
+//Approve route
+app.put("/approve", async (req, res) => {
+    try {
+        const { id } = req.body;
+        console.log(id)
+        if (!id) {
+            return res.status(400).json({ message: "Campaign ID is required" });
+        }
+
+
+        const updatedCampaign = await Campaign.findByIdAndUpdate(
+            id,
+            { status: 'approved', approvedAt: Date.now() },
+            { new: true } // Ensures the updated document is returned
+        );
+        if (!updatedCampaign) {
+            return res.status(404).json({ message: "Campaign not found" });
+        }
+        res.json(updatedCampaign);
+        console.log(updatedCampaign)
+
+
+
+
+
+
+
+
+
+
+    } catch (err) {
+        console.error("Error updating Campaign:", err);
+        res.status(500).json({ message: "Failed to update Campaign", error: err.message });
+    }
+});
+
+
+
+//Reject Route
+
+app.put("/reject", async (req, res) => {
+    try {
+        const { id } = req.body;
+        console.log(id)
+        if (!id) {
+            return res.status(400).json({ message: "Campaign ID is required" });
+        }
+
+
+        const updatedCampaign = await Campaign.findByIdAndUpdate(
+            id,
+            { status: 'rejected', rejectedAt: Date.now() },
+            { new: true } // Ensures the updated document is returned
+        );
+        if (!updatedCampaign) {
+            return res.status(404).json({ message: "Campaign not found" });
+        }
+        res.json(updatedCampaign);
+        console.log(updatedCampaign)
+
+
+
+
+
+
+
+
+
+
+    } catch (err) {
+        console.error("Error updating Campaign:", err);
+        res.status(500).json({ message: "Failed to update Campaign", error: err.message });
+    }
+});
+
+
+
+// Admin
+
+
+
+
+
+
+
+//Login router for the House Masters
+app.post("/admin-login", async (req, res) => {
+    const { username, password } = req.body;
+    console.log(username, password)
+
+    try {
+        const admin = await Admin.findOne({ username });
+        console.log(admin)
+        if (!admin) return res.status(401).json({ message: "Invalid credentials" });
+
+
+        // ✅ CORRECT: Compare plain password with hashed one
+        const isMatch = await bcrypt.compare(password, admin.password);
+        console.log("🔹 Password match result:", isMatch);
+        if (!isMatch) return res.status(401).json({ message: "Invalid credentials" });
+
+        const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        return res.status(200).json({ token, message: "Login successful" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+
+
+app.put("/admin-change-password", async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+
+
+    try {
+        const admin = await Admin.findOne();
+        if (!admin) return res.status(404).json({ message: "Admin not found" });
+
+        const isMatch = await bcrypt.compare(oldPassword, admin.password);
+        if (!isMatch) return res.status(400).json({ message: "Old password is incorrect" });
+
+        const salt = await bcrypt.genSalt(10);
+        admin.password = await bcrypt.hash(newPassword, salt);
+        await admin.save();
+
+        res.json({ message: "Password changed successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+
+
+
+
+
+
+
+
+(async () => {
+    const password = "admin123";  // Set the correct password
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    console.log("🔹 Correct Hashed Password:", hashedPassword);
+})();
+
+
+
+
+// Ban or unban a user
+app.put("/admin/users/:id/ban", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { banned } = req.body; // Get the new ban status from the request
+        console.log(id, banned)
+        const user = await User.findByIdAndUpdate(
+            id,
+            {banned:banned}, // Use $set to explicitly update the field
+            { new: true, runValidators: true } // Ensures updated document is returned
+        );
+
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.json({ message: `User ${banned ? "banned" : "unbanned"} successfully`, user });
+    } catch (error) {
+        console.error("Error banning user:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+
+app.get("/admin/campaigns", async (req, res) => {
+    try {
+        const currentTime = new Date();
+
+        // Fetch campaigns and filter them based on remaining time
+        const campaigns = await Campaign.find().populate('creator', 'name');
+
+        const activeCampaigns = campaigns.filter(campaign => {
+            const endTime = new Date(campaign.createdAt);
+            endTime.setDate(endTime.getDate() + campaign.duration); // Adding days to createdAt
+
+            return (endTime > currentTime); // Only return campaigns that have time left
+        });
+
+        res.status(200).json(activeCampaigns);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+
+app.get("/admin/stats", async (req, res) => {
+    try {
+        const totalUsers = await User.countDocuments();
+        const totalCampaigns = await Campaign.countDocuments();
+        const totalFunds = await Campaign.aggregate([
+            { $group: { _id: null, total: { $sum: "$pledged" } } }
+        ]);
+
+        // Fetch recently created campaigns
+        const recentCreatedCampaigns = await Campaign.find()
+            .sort({ createdAt: -1 })
+            .limit(5);
+
+        // Fetch recently funded campaigns
+        const recentFundedCampaigns = await Campaign.find({ pledged: { $gt: 0 } })
+            .sort({ updatedAt: -1 })
+            .limit(5);
+
+        // Fetch recently joined users
+        const recentUsers = await User.find()
+            .sort({ createdAt: -1 })
+            .limit(5);
+
+        res.json({ 
+            totalUsers, 
+            totalCampaigns, 
+            totalFunds: totalFunds[0]?.total || 0, 
+            recentCreatedCampaigns, 
+            recentFundedCampaigns, 
+            recentUsers 
+        });
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+app.get("/admin/users", async (req, res) => {
+    try {
+        const users = await User.find(); // Get all users
+
+        // Fetch campaigns for each user dynamically
+        const usersWithCampaigns = await Promise.all(
+            users.map(async (user) => {
+                const campaigns = await Campaign.find({ creator: user._id }); // Get campaigns by user ID
+                return { ...user.toObject(), campaigns }; // Merge campaigns with user object
+            })
+        );
+
+        res.status(200).json(usersWithCampaigns);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
