@@ -72,7 +72,7 @@ export default function HomePage() {
         </div>
         <div className="mt-6 flex items-center gap-3">
           <div className="flex -space-x-2 overflow-hidden">
-            <Image src="http://82.29.153.135:3000/man.jpg" alt="Backers" width={40} height={40} className="rounded-full border border-white" />
+            <Image src="/man.jpg" alt="Backers" width={40} height={40} className="rounded-full border border-white" />
             <Image src="/girl.jpg" alt="Backers" width={40} height={40} className="rounded-full border border-white" />
             <span className="bg-white text-blue-500 px-3 py-1 rounded-full shadow-md text-sm font-semibold">+2k</span>
           </div>
@@ -82,7 +82,7 @@ export default function HomePage() {
 
       {/* Right-side Hero Image */}
       <div className="hidden md:block w-1/2">
-        <Image src="http://82.29.153.135:3000/hero.jpeg" alt="Workspace" width={600} height={400} className="rounded-lg shadow-md" />
+        <Image src="/hero.jpeg" alt="Workspace" width={600} height={400} className="rounded-lg shadow-md" />
       </div>
     </section>
 
