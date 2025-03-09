@@ -57,7 +57,10 @@ export default function Campaigns() {
 
         fetchCampaigns();
     }, [creator]); // ✅ Runs when creator updates
-
+   const capitalize = (str) => {
+        return str.replace(/\b\w/g, char => char.toUpperCase());
+    };
+    
     const handleDelete = async (id) => {
         if (!confirm("Are you sure you want to delete this campaign?")) return;
 
@@ -98,6 +101,14 @@ export default function Campaigns() {
                             <Card key={campaign._id} className="p-4 shadow-lg">
                             <CardContent>
                               <h2 className="text-xl text-green-700 font-semibold">{campaign.title}</h2>
+                  <p className={`
+    ${campaign.status === 'pending' ? 'bg-yellow-400 text-yellow-900' :
+                                            campaign.status === 'rejected' ? 'bg-red-300 text-red-800' :
+                                                'bg-green-400 text-green-900'} 
+    rounded px-3 py-1 text-sm font-semibold w-fit
+`}>
+                                        {capitalize(campaign.status)}
+                                    </p>
                               <p className="text-gray-600 mt-2">{campaign.description}</p>
                               <p className="mt-2 text-[#656969] font-bold">Goal: ${campaign.goal}</p>
                               <p className="mt-1 text-[#656969] font-bold">Pledged: ${campaign.pledged}</p>
