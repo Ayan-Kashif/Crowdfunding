@@ -15,7 +15,7 @@ export default function AdminDashboard() {
 
 
     useEffect(() => {
-        fetch("http://localhost:5000/admin/stats")
+        fetch("http://82.29.153.135/admin/stats")
             .then((res) => res.json())
             .then((data) => setStats(data))
             .catch((err) => console.error("Error:", err));
