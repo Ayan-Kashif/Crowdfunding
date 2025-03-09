@@ -34,7 +34,7 @@ export default function AdminLogin() {
     console.log("Password:", form.password);
 
     try {
-      const response = await fetch("http://localhost:5000/admin-login", {
+      const response = await fetch("http://82.29.153.135:5000/admin-login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
