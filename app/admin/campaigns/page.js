@@ -116,7 +116,7 @@ export default function AdminDashboard() {
 
     const handleApprove = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/approve`, {
+            const response = await fetch(`http://82.29.153.135:5000/approve`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ id }),
@@ -134,7 +134,7 @@ export default function AdminDashboard() {
 
     const handleReject = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/reject`, {
+            const response = await fetch(`http://82.29.153.135:5000/reject`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ id }),
