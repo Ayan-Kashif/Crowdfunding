@@ -39,9 +39,9 @@ const CampaignSchema = new mongoose.Schema({
     type: String, // URL of the campaign image
     required: true,
   },
-  category: {
+   category: {
     type: String,
-    enum: ["technology", "health", "education", "arts", "community", "other"], // Categorization for filtering
+    enum: ["technology",'gaming','green tech' ,'education','consumer products' ,'healthcare' ,"other"], // Categorization for filtering
     required: true,
   },
   status: {
