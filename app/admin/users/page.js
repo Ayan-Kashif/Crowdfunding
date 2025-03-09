@@ -108,7 +108,7 @@ export default function UserManagement() {
 
     const fetchUsers = async () => {
         try {
-            const res = await fetch("http://localhost:5000/admin/users");
+            const res = await fetch("http://82.29.153.135:5000/admin/users");
             const data = await res.json();
             setUsers(data);
             setLoading(false);
