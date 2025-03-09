@@ -13,7 +13,8 @@ const nextConfig = {
               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
               img-src 'self' data: http://82.29.153.135:5000/uploads http://82.29.153.135:5000/uploads/  https://stripe.com https://js.stripe.com;
               font-src 'self' https://fonts.gstatic.com https://js.stripe.com;
-              connect-src 'self' http://82.29.153.135:5000/ https://api.stripe.com;
+             connect-src 'self' http://82.29.153.135:5000/ https://api.stripe.com ws://82.29.153.135:5000;
+
               frame-src 'self' https://js.stripe.com https://www.google.com https://www.recaptcha.net;
             `.replace(/\n/g, ""), // Remove new lines
           },
