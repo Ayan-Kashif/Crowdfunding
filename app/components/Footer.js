@@ -11,7 +11,7 @@ const Footer = () => {
                     <div class="md:flex md:justify-between">
                         <div class="mb-6 md:mb-0">
                             <a href="https://flowbite.com/" class="flex items-center">
-                                <img src="images.png" class="h-8 me-3 rounded-full" alt="FlowBite Logo" />
+                                <img src="http://82.29.153.135:3000/images.png" class="h-8 me-3 rounded-full" alt="FlowBite Logo" />
                                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Fundify</span>
                             </a>
                         </div>
@@ -36,11 +36,11 @@ const Footer = () => {
                                     <li class="mb-4">
                                         <a href="/create-campaign" class="hover:underline ">Start a Campaign</a>
                                     </li>
-                                    <li>
+                                    <li class="mb-4">
                                         <a href="/investors" class="hover:underline">For Investors</a>
                                     </li>
                                     <li class="mb-4">
-                                        <a href="/admin/dashboard" class="hover:underline">For Investors</a>
+                                        <a href="/admin/dashboard" class="hover:underline">Admin</a>
                                     </li>
                                 </ul>
                             </div>
