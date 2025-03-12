@@ -227,9 +227,28 @@ app.post("/campaign", upload.single("image"), async (req, res) => {
 
 app.post('/stripe/create-account', async (req, res) => {
     try {
-        const { email, creatorId } = req.body; // Get user details
+          // Find the user in the database
+         const { email, creatorId } = req.body; // Get user details
         console.log(creatorId)
-        // Create a Stripe Connect account for the campaign creator
+        const user = await User.findById(creatorId);
+
+        // If user exists and already has a Stripe account, use the existing account
+        if (user && user.accountID) {
+            console.log(`Reusing existing Stripe account: ${user.accountID}`);
+
+            // Create an onboarding link for the existing account
+            const accountLink = await stripe.accountLinks.create({
+                account: user.accountID,
+                refresh_url: "http://82.29.153.135:3000/retry",
+                return_url: "http://82.29.153.135:3000/create-campaign",
+                type: "account_onboarding",
+            });
+
+            return res.json({ url: accountLink.url });
+        }
+
+        // If user doesn't have a Stripe account, create a new one
+        console.log("Creating new Stripe account...");
         const account = await stripe.accounts.create({
             type: "express",
             country: "US", // Change based on your needs
@@ -255,6 +274,26 @@ app.post('/stripe/create-account', async (req, res) => {
         console.log(error)
     }
 })
+
+app.post('/stripe/account-dashboard', async (req, res) => {
+    try {
+        const { creatorId } = req.body;
+
+        // Fetch user from database
+        const user = await User.findById(creatorId);
+        if (!user || !user.accountID) {
+            return res.status(400).json({ error: "User does not have a Stripe account" });
+        }
+
+        // Generate login link for Stripe Express dashboard
+        const loginLink = await stripe.accounts.createLoginLink(user.accountID);
+
+        res.json({ url: loginLink.url });
+    } catch (error) {
+        console.error("Stripe Login Link Error:", error);
+        res.status(500).json({ error: error.message });
+    }
+});
 
 app.post('/stripe/fund-project', async (req, res) => {
     try {
@@ -646,6 +685,19 @@ app.get("/admin/users", async (req, res) => {
         res.status(200).json(usersWithCampaigns);
     } catch (error) {
         res.status(500).json({ error: error.message });
+    }
+});
+
+// Fetch Top 3 Most Funded Projects (Latest in case of tie)
+app.get("/top-projects", async (req, res) => {
+    try {
+        const topProjects = await Campaign.find()
+            .sort({ pledged: -1, createdAt: -1 }) // Sort by funds first, then by latest date
+            .limit(3);
+
+        res.json(topProjects);
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error });
     }
 });
 
