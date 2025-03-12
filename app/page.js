@@ -12,6 +12,7 @@ import { Users, Monitor, ShoppingBag, Leaf, HeartPulse, Gamepad2, MoreHorizontal
 export default function HomePage() {
 
 
+  const [projects, setProjects] = useState([]);
   
 
   const [categories, setCategories] = useState([]);
@@ -37,7 +38,19 @@ export default function HomePage() {
     successfulProjects: 15000,
     globalBackers: 500000,
 }
+  useEffect(() => {
+    const fetchTopProjects = async () => {
+      try {
+        const response = await fetch("http://82.29.153.135:5000/top-projects");
+        const data = await response.json();
+        setProjects(data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
 
+    fetchTopProjects();
+  }, []);
   useEffect(() => {
       fetch("http://82.29.153.135:5000/campaigns")  // Replace with your actual campaigns API endpoint
           .then((res) => res.json())
