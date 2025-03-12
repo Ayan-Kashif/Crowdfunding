@@ -5,6 +5,7 @@
 
 import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
+import {FaTachometerAlt} from "react-icons/fa"; // Importing a dashboard icon
 import { FiMenu, FiX } from "react-icons/fi";
 import { AuthContext } from "../AuthContext"; // Ensure correct import
 import { useRouter, usePathname } from "next/navigation";
