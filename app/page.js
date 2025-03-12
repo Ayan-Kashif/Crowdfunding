@@ -2,6 +2,11 @@
 import { useState,useEffect } from "react";
 import Link from 'next/link'
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 import { Users, Monitor, ShoppingBag, Leaf, HeartPulse, Gamepad2, MoreHorizontal } from "lucide-react";
 export default function HomePage() {
@@ -18,6 +23,14 @@ export default function HomePage() {
       { name: "gaming", icon: "🎮" },
       { name: "more", icon: "➕" },
   ];
+
+    const products = [
+    { id: 1, img: "/product1.png", name: "Product 1" },
+    { id: 2, img: "/product2.png", name: "Product 2" },
+    { id: 3, img: "/product3.png", name: "Product 3" },
+
+  ];
+
 
   const stats = {
     totalFunds: 125, // In million dollars
@@ -113,6 +126,94 @@ export default function HomePage() {
                 ))}
             </div>
         </section>
+
+                        {/* 
+Top Funded */}
+
+      <section className="bg-gray-900 text-white py-10 flex justify-center items-center min-h-screen">
+        <div className="max-w-5xl w-full px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
+            🚀 Top Funded Projects
+          </h2>
+          <p className="text-center text-gray-300 mb-6">
+            Discover the most successful projects supported by our community.
+          </p>
+
+          {projects.length > 0 ? (
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              navigation
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 3000 }}
+              loop={true}
+              className="rounded-xl shadow-xl overflow-hidden"
+            >
+              {projects.map((project) => (
+                <SwiperSlide key={project._id} className="relative">
+                  <img
+                    src={`http://82.29.153.135:5000${project.image}`}
+                    alt={project.name}
+                    className="w-full h-64 md:h-80 lg:h-96 object-cover rounded-xl"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white text-center p-4">
+                    <h3 className="text-xl md:text-2xl font-semibold">
+                      {project.name}
+                    </h3>
+                    <p className="text-sm md:text-base text-gray-300">
+                      {project.description}
+                    </p>
+                    <span className="mt-3 bg-green-500 text-white px-4 py-2 rounded-lg shadow-md">
+                      💰 {project.pledged.toLocaleString()} USD
+                    </span>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <p className="text-center text-gray-400">No projects available.</p>
+          )}
+        </div>
+      </section>
+      {/*        Slider Section */}
+
+      <section className="bg-gradient-to-r from-gray-900 to-gray-700 text-white flex justify-center items-center mt-0 min-h-screen p-4">
+        <div className="max-w-4xl w-full">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
+            Explore Our Latest Products
+          </h2>
+          <p className="text-center text-gray-300 mb-4">
+            Making Orthodox Weddings Affordable – A One-Stop Wedding Mall
+          </p>
+
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            navigation
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 3000 }}
+            loop={true}
+            className="rounded-xl shadow-xl overflow-hidden"
+          >
+            {products.map((product) => (
+              <SwiperSlide key={product.id} className="relative">
+                <img
+                  src={product.img}
+                  alt={product.name}
+                  className="w-full h-64 md:h-80 lg:h-96 object-cover rounded-xl"
+                />
+                {/* Text Overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white text-center p-4">
+                  <h3 className="text-xl md:text-2xl font-semibold">{product.name}</h3>
+                  <Link href='/projects'><button className="mt-3 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md">
+                    View More
+                  </button>
+                  </Link>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </section>
+
 
 
 
