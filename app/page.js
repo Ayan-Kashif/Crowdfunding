@@ -174,7 +174,7 @@ Top Funded */}
                     </h3>
                  <p className="text-sm md:text-base text-gray-300">
   {project.description.split(" ").length > 20
-    ? project.description.split(" ").slice(0, 20).join(" ") + "..."
+    ? project.description.split(" ").slice(0, 10).join(" ") + "..."
     : project.description}
 </p>
 
