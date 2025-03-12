@@ -172,9 +172,12 @@ Top Funded */}
                     <h3 className="text-xl md:text-2xl font-semibold">
                       {project.name}
                     </h3>
-                    <p className="text-sm md:text-base text-gray-300">
-                      {project.description}
-                    </p>
+                 <p className="text-sm md:text-base text-gray-300">
+  {project.description.split(" ").length > 20
+    ? project.description.split(" ").slice(0, 20).join(" ") + "..."
+    : project.description}
+</p>
+
                     <span className="mt-3 bg-green-500 text-white px-4 py-2 rounded-lg shadow-md">
                       💰 {project.pledged.toLocaleString()} USD
                     </span>
